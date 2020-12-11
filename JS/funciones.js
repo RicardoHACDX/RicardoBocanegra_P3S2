@@ -1,5 +1,5 @@
-function abrirPanel(panelInicial){
-    const paneles = document.querySelectorAll(".panel")
+ function abrirPanel(panelInicial){
+const paneles = document.querySelectorAll(".panel")
     paneles.forEach(panel=>panel.classList.remove("activa"));
     const opciones = document.querySelectorAll(".opcion")
     opciones.forEach(opcion=>opcion.classList.remove("activo"))
@@ -11,7 +11,7 @@ fetch('../data/bd.json')
 function agregarProyectos(datos){
     const proyectos = datos
     const tabla=document.querySelector("#listarProyectos")
-        proyectos.forEach(proyecto=>{
+    proyectos.forEach(proyecto=>{
          tabla.innerHTML+=`
          
               ${proyecto.nombre}
@@ -21,7 +21,6 @@ function agregarProyectos(datos){
          `
     })
 }
-
 function insertar(evt){
     evt.preventDefault()
     
@@ -34,9 +33,24 @@ function insertar(evt){
     agregarProyectos(valores)
     limpiarFormulario()
 }
-
 function limpiarFormulario(){
      document.getElementById("nombre").value="";
      document.getElementById("lenguaje").value="";
      document.getElementById("monto").value="";
+}
+function traerMensaje(){
+fetch('https://randomuser.me/api')
+    .then(respuesta=>respuesta.json())
+    .then(datos=>listarMensajes(datos.results[0]))
+}
+function listarMensajes(datos){
+    const tablaMensajes=document.querySelector("#listarMensajes")
+   
+    tablaMensajes.innerHTML+=`
+    
+         ${datos.name.first} ${datos.name.last}
+         ${datos.cell}
+         Contácteme por favor
+    
+    `
 }
